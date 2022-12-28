@@ -1,0 +1,12 @@
+- name: Configure snmp on routers
+  hosts: routers
+  connection: network_cli
+  gather_facts: false
+  tasks:
+    - name: Enable snmp
+      community.routeros.command:
+        commands: /snmp set enabled yes
+
+    - name: Add snmp community
+      community.routeros.command:
+        commands: /snmp community add name=test addresses=192.168.100.13

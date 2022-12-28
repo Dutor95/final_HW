@@ -1,0 +1,33 @@
+- name: Configure clock and NTP client
+  hosts: routers
+  connection: network_cli
+  gather_facts: false
+  tasks:
+    - name: Set clock
+      community.routeros.command:
+        commands: /system clock set time-zone-name=Europe/Berlin
+            
+    - name: Check clock status
+      community.routeros.command:
+        commands:
+          - /system clock print
+      register: system_clock_print
+
+    - name: Show clock resources
+      debug:
+        var: system_clock_print.stdout_lines
+    
+    - name: Set NTP 
+      community.routeros.command:
+         commands: /system ntp client set enabled=yes server-dns-names=pool.ntp.org
+
+    - name: Check ntp status
+      community.routeros.command:
+        commands:
+          - /system ntp client print
+      register: system_ntp_client_print
+
+    - name: Show ntp resources
+      debug:
+        var: system_ntp_client_print.stdout_lines
+    

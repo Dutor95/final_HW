@@ -1,0 +1,8 @@
+- name: Ping
+  hosts: routers
+  connection: network_cli
+  gather_facts: false
+  tasks:
+    - name: System command
+      community.routeros.command:
+        commands: ping 192.168.100.13 count 3 size 100

@@ -1,4 +1,4 @@
 # Final HW
 
 ## INFO
-Сделано, для микротика.
+This playbooks with commands for mikrotik devices

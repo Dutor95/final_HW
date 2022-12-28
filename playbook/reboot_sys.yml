@@ -1,0 +1,8 @@
+- name: Reboot system
+  hosts: routers
+  connection: network_cli
+  gather_facts: false
+  tasks:
+    - name: System command
+      community.routeros.command:
+        commands: /system reboot
